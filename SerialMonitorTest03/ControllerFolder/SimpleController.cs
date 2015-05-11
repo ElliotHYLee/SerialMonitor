@@ -22,8 +22,6 @@ namespace SerialMonitorTest03.ControllerFolder
             this.isConnected = false;
             this._mainWindow = sender;
             this._usb = new USB(this._mainWindow, this._data);
-            this._mainWindow.txtIncraseCalInterval.Text = "10";
-            this._mainWindow.txtDecraseCalInterval.Text = "10";
             //this._mainWindow.imgAttitude.Source =  "GraphicsFolder\img.jpg";
             this.refreshComports();
             
@@ -38,37 +36,14 @@ namespace SerialMonitorTest03.ControllerFolder
                 this._mainWindow.lblStatus.Content = this._usb.getPortName() + " online";
                 this._mainWindow.btnRefresh.IsEnabled = false;
                 this._mainWindow.btnConnect.Content = "Disconnect";
-                this._mainWindow.btnStartPWM.IsEnabled = true;
-                this._mainWindow.btnStop.IsEnabled = true;
-                this._mainWindow.btnDecreaseAll.IsEnabled = true;
-                this._mainWindow.btnDecreaseMotor1.IsEnabled = true;
-                this._mainWindow.btnDecreaseMotor2.IsEnabled = true;
-                this._mainWindow.btnDecreaseMotor3.IsEnabled = true;
-                this._mainWindow.btnDecreaseMotor4.IsEnabled = true;
-                this._mainWindow.btnIncreaseAll.IsEnabled = true;
-                this._mainWindow.btnIncreaseMotor1.IsEnabled = true;
-                this._mainWindow.btnIncreaseMotor2.IsEnabled = true;
-                this._mainWindow.btnIncreaseMotor3.IsEnabled = true;
-                this._mainWindow.btnIncreaseMotor4.IsEnabled = true;
-                
+
             }
             else
             {
                 this._mainWindow.lblStatus.Content = "No ports online";
                 this._mainWindow.btnRefresh.IsEnabled = true;
                 this._mainWindow.btnConnect.Content = "Connect";
-                this._mainWindow.btnStartPWM.IsEnabled = false;
-                this._mainWindow.btnStop.IsEnabled = false;
-                this._mainWindow.btnDecreaseAll.IsEnabled = false;
-                this._mainWindow.btnDecreaseMotor1.IsEnabled = false;
-                this._mainWindow.btnDecreaseMotor2.IsEnabled = false;
-                this._mainWindow.btnDecreaseMotor3.IsEnabled = false;
-                this._mainWindow.btnDecreaseMotor4.IsEnabled = false;
-                this._mainWindow.btnIncreaseAll.IsEnabled = false;
-                this._mainWindow.btnIncreaseMotor1.IsEnabled = false;
-                this._mainWindow.btnIncreaseMotor2.IsEnabled = false;
-                this._mainWindow.btnIncreaseMotor3.IsEnabled = false;
-                this._mainWindow.btnIncreaseMotor4.IsEnabled = false;
+
             }
 
         }
@@ -118,46 +93,9 @@ namespace SerialMonitorTest03.ControllerFolder
             checkConvention();
         }
         
-        public void decreaseAll()
-        {
-            decreaseMotor(1);
-            decreaseMotor(2);
-            decreaseMotor(3);
-            decreaseMotor(4);
-        }
-        
-        public void increaseAll()
-        {
-            increaseMotor(1);
-            increaseMotor(2);
-            increaseMotor(3);
-            increaseMotor(4);
-        }
-       
-        public void decreaseMotor(int motorNumber)
-        {
-            int temp = Convert.ToInt32(this._data.getPwm(motorNumber)) - Convert.ToInt32(this._mainWindow.txtDecraseCalInterval.Text);
-            String value = "M" + motorNumber.ToString()+ temp.ToString();
-            this._usb.sendData(value);
-            Console.WriteLine("New Sending:" + value);
-        }
-        
-        public void increaseMotor(int motorNumber)
-        {
-            int temp = Convert.ToInt32(this._data.getPwm(motorNumber)) + Convert.ToInt32(this._mainWindow.txtIncraseCalInterval.Text);
-            String value = "M" + motorNumber.ToString() + temp.ToString();
-            this._usb.sendData(value);
-            Console.WriteLine("New Sending:" + value);
 
-        }
         
-        public void clearPwm()
-        {
-            this._mainWindow.txtMotor1.Text = "";
-            this._mainWindow.txtMotor2.Text = "";
-            this._mainWindow.txtMotor3.Text = "";
-            this._mainWindow.txtMotor4.Text = "";
-        }
+      
 
         public void start()
         {

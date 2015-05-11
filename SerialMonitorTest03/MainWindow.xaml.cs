@@ -47,56 +47,7 @@ namespace SerialMonitorTest03
 
 
 
-        private void btnDecreaseMotor1_Click(object sender, RoutedEventArgs e)
-        {
-            _controller.decreaseMotor(1);
-        }
-        private void btnDecreaseMotor2_Click(object sender, RoutedEventArgs e)
-        {
-            _controller.decreaseMotor(2);
-        }
 
-        private void btnDecreaseMotor3_Click(object sender, RoutedEventArgs e)
-        {
-            _controller.decreaseMotor(3);
-        }
-
-        private void btnDecreaseMotor4_Click(object sender, RoutedEventArgs e)
-        {
-            _controller.decreaseMotor(4);
-        }
-
-
-        #region IncreaseButtons
-        private void btnIncreaseMotor1_Click(object sender, RoutedEventArgs e)
-        {
-            _controller.increaseMotor(1);
-        }
-
-        private void btnIncreaseMotor2_Click(object sender, RoutedEventArgs e)
-        {
-            _controller.increaseMotor(2);
-        }
-
-        private void btnIncreaseMotor3_Click(object sender, RoutedEventArgs e)
-        {
-            _controller.increaseMotor(3);
-        }
-
-        private void btnIncreaseMotor4_Click(object sender, RoutedEventArgs e)
-        {
-            _controller.increaseMotor(4);
-        }
-
-
-        #endregion
-
-
-
-        private void btnDecreaseAll_Click(object sender, RoutedEventArgs e)
-        {
-            _controller.decreaseAll();
-        }
 
         private void btnStop_Click(object sender, RoutedEventArgs e)
         {
@@ -106,11 +57,6 @@ namespace SerialMonitorTest03
         private void menuAuthor_click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Elliot Lee");
-        }
-
-        private void btnIncreaseAll_Click(object sender, RoutedEventArgs e)
-        {
-            _controller.increaseAll();
         }
 
         private void btnStartPWM_Click(object sender, RoutedEventArgs e)
@@ -133,26 +79,20 @@ namespace SerialMonitorTest03
 
         }
 
-        private void txtMotor1_TextChanged(object sender, TextChangedEventArgs e)
+        
+
+        private void OnKey(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)
+            {
+                _controller.sendMsg(this.txtSend.Text);
+            }
+        }
+
+        private void txtSend_TextChanged(object sender, TextChangedEventArgs e)
         {
 
         }
-
-        private void txtMotor2_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void txtMotor3_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void txtMotor4_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
   
 
 

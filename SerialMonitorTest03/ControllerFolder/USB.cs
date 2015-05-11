@@ -63,8 +63,13 @@ namespace SerialMonitorTest03.ControllerFolder
         {
             SerialPort sp = (SerialPort)sender;
             String indata = (String)this._serial.ReadExisting();
-            this._mainWindow.rTxtMonitor.AppendText(indata);
-            
+
+            Console.WriteLine(indata);
+            this._mainWindow.Dispatcher.Invoke(() =>
+            {
+                this._mainWindow.txtRecieved.Text = "";
+                this._mainWindow.txtRecieved.Text = indata;
+            });
             //this.getLine(indata);
             //this.updateMainWidow();
         }
@@ -151,21 +156,7 @@ namespace SerialMonitorTest03.ControllerFolder
 
         private void updateMainWidow()
         {
-            this._mainWindow.Dispatcher.Invoke(() =>
-            {
-                this._mainWindow.txtMotor1.Text = this._data.getPwm(1);
-                this._mainWindow.txtMotor2.Text = this._data.getPwm(2);
-                this._mainWindow.txtMotor3.Text = this._data.getPwm(3);
-                this._mainWindow.txtMotor4.Text = this._data.getPwm(4);
-
-                this._mainWindow.txtDirCosX.Text = this._data.getDirCos(1);
-                this._mainWindow.txtDirCosY.Text = this._data.getDirCos(2);
-                this._mainWindow.txtDirCosZ.Text = this._data.getDirCos(3);
-
-                this._mainWindow.txtAngleX.Text = (Math.Acos(Double.Parse(this._data.getDirCos(1))) * 180 / Math.PI).ToString();
-                this._mainWindow.txtAngleY.Text = (Math.Acos(Double.Parse(this._data.getDirCos(2))) * 180 / Math.PI).ToString();
-                this._mainWindow.txtAngleZ.Text = (Math.Acos(Double.Parse(this._data.getDirCos(3))) * 180 / Math.PI).ToString();
-            });
+           
         }
 
         public Boolean disconnect()
